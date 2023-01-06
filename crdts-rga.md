@@ -3,7 +3,7 @@ layout: docs
 title: RGA and Rich Text
 ---
 
-SQLite has great support for querying agaginst indexed recursive relationships, unlocking a whole set of tree based CRDTs such as RGA.
+SQLite has great support for [querying agaginst indexed recursive relationships](https://www.sqlite.org/lang_with.html#recursive_common_table_expressions), unlocking a whole set of tree based CRDTs such as RGA.
 
 We're still working on it but support for Replicated Growable Arrays (RGA) and rich text is coming!
 

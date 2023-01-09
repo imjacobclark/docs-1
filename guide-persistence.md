@@ -113,8 +113,8 @@ Import the required packages and init the wasm:
 
 <div class="runnable-code">
   <div>
-return import('https://esm.sh/@vlcn.io/wa-crsqlite').then(async (initWasm) => {
-  return self.sqlite = await initWasm.default(() => "https://esm.sh/@vlcn.io/wa-crsqlite/dist/wa-sqlite-async.wasm");
+return import('https://esm.sh/@vlcn.io/wa-crsqlite@0.6.3').then(async (initWasm) => {
+  return self.sqlite = await initWasm.default(() => "https://esm.sh/@vlcn.io/wa-crsqlite@0.6.3/dist/wa-sqlite-async.wasm");
 });
   </div>
 </div>

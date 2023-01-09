@@ -5,35 +5,46 @@ title: Writing a networking layer
 
 [[docs/guide-sync]] showed you how to sync changes from one database to another using the primitives of [[docs/crsql_changes]] and [[docs/crsql_tracked_peers]]. That guide, however, was interacting when both databases can be mounted in the same process. In this guide we'll discuss how to sync database state over a network.
 
-TODO: split into:
-- using an existing networking layer
-- writing your own networking layer
+# Network Agnostic
 
-# Topology
+`cr-sqlite` is technically network agnostic. The reason is that there are many different configurations you may want for your network layer. Such as:
 
-You can sync databases in a Peer2Peer fashion or in a client-server setup. We'll cover writing a client-server networking layer followed by peer 2 peer.
+- P2P vs client-server
+- Push vs pull
+- TCP vs UDP vs WebSockets vs other
 
-# Client-Server
+All those considerations aside, `vlcn` does provide two default networking layers. The first being a client-server setup and the second being peer 2 peer. Both allow you to pick your transport.
 
-Within client-server there is another choice:
+# Client-Server Networking
 
-1. Send updates via a push model
-2. Send updates via a pull model
+Both the client and server are pushed based.
 
-We'll assume we're using a push model via [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
+Whenever a client makes a change locally, it will send that change to the server.
+
+Whenever the server receives a change from a client it will broadcast that change to all other connected clients.
+
+![client-server-forward](./assets/client-server-forward.svg)
+
+Thus everyone is kept in sync as writes are made. If a client has been offline for a while, it will:
+
+1. Send all changes that it has made since it was last online to the server
+2. Receive all changes that it has missed, while offline, from the server
+
+If the server is offline clients can continue to make changes locally. When the server comes back, they will send all changes they made while the server was offline and the server will re-broadcast those changes to clients as they connect.
+
+The client and server are currently written in `TypeScript`. Native versions are on the roadmap which will be cross-compiled and includable as libraries from any language.
+
+## The Server
+
+- Standlone binary
+  - Configuration options
+    - DBs
+    - Schemas
+- Library
+  - Socket interface
+  - Config
 
 ## The Client
-
-The client will be responsible for configuring two data streams:
-
-1. The client to server stream
-2. The server to client stream
-
-These change streams start at a given point in time -- the last time the client sent changes to the server and the last time the server sent changes to the client. The client will need to track these points in time in the [[docs/crsql_tracked_peers]] table in order to configure the streams.
-
-> One hard requirement for networking layers is that they do not record having seen a clock value from a peer until they've persisted all changes prior and up to that clock value. If a networking layer records itself as having processed change 10 when it only processed up to change 5, all changes between 5 and 10 could be lost.
-
-
 
 # Note:
 - There is not yet an off the shelf sync server that you can just grab and use

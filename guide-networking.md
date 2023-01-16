@@ -23,7 +23,7 @@ Whenever a client makes a change locally, it will send that change to the server
 
 Whenever the server receives a change from a client it will broadcast that change to all other connected clients.
 
-![client-server-forward](./assets/client-server-forward.svg)
+![client-server-forward](../assets/docs/guides/client-server-forward.svg)
 
 Thus everyone is kept in sync as writes are made. If a client has been offline for a while, it will:
 
@@ -34,24 +34,10 @@ If the server is offline clients can continue to make changes locally. When the 
 
 The client and server are currently written in `TypeScript`. Native versions are on the roadmap which will be cross-compiled and includable as libraries from any language.
 
-## The Server
-
-- Standlone binary
-  - Configuration options
-    - DBs
-    - Schemas
-- Library
-  - Socket interface
-  - Config
-
-## The Client
-
-# Note:
-- There is not yet an off the shelf sync server that you can just grab and use
-- Prototype sync services have been built and a production grade sync server is on the roadmap
-  - [p2p prototype](https://github.com/vlcn-io/cr-sqlite/tree/main/js/sync-reference/p2p)
+- Reference sync services have been built and a production grade versions are on the roadmap
+  - [p2p reference](https://github.com/vlcn-io/cr-sqlite/tree/main/js/sync-reference/p2p)
     - [usage](https://github.com/vlcn-io/cr-sqlite/tree/main/js/examples/p2p-todomvc)
-  - client-server prototype
+  - client-server reference
     - [usage](https://github.com/vlcn-io/cr-sqlite/tree/main/js/examples/todomvc)
     - [client](https://github.com/vlcn-io/cr-sqlite/tree/main/js/sync-reference/client)
     - [server](https://github.com/vlcn-io/cr-sqlite/tree/main/js/sync-reference/server)

@@ -102,8 +102,7 @@ The pros of the unofficial port come down to its ability to use `indexeddb` for 
 
 **The cons:**
 
-1. [GPLv3 license](https://github.com/rhashimoto/wa-sqlite/blob/master/LICENSE)
-2. May not be as fast as the official port although an apples to apples comparison has yet to be done. [benchmarks](https://rhashimoto.github.io/wa-sqlite/demo/benchmarks.html). With persistence enabled, it hits 25k inserts in 0.25 seconds on an m1 laptop.
+1. May not be as fast as the official port although an apples to apples comparison has yet to be done. [benchmarks](https://rhashimoto.github.io/wa-sqlite/demo/benchmarks.html). With persistence enabled, it hits 25k inserts in 0.25 seconds on an m1 laptop.
 
 Given the portability of `wa-sqlite`, that port will be used for the rest of this guide.
 

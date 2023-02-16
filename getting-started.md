@@ -25,7 +25,8 @@ There are two ways to use `vlcn` & `cr-sqlite` with `SQLite`:
 To obtain a copy of the extension:
 
 ```bash
-git clone git@github.com:vlcn-io/cr-sqlite.git
+rustup toolchain install nightly # make sure you have the rust nightly toolchain
+git clone --recurse-submodules git@github.com:vlcn-io/cr-sqlite.git
 cd cr-sqlite/core
 make loadable
 ```
